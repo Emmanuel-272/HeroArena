@@ -1,0 +1,22 @@
+﻿<Page x:Class="HeroArena.Views.SettingsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BrushBgDark}">
+
+    <StackPanel Margin="40" MaxWidth="500">
+        <TextBlock Text="PARAMÈTRES" FontSize="22" FontWeight="Black"
+                   Foreground="{StaticResource BrushAccentGold}" Margin="0,0,0,32"/>
+
+        <TextBlock Text="CONNEXION BASE DE DONNÉES" FontSize="11" FontWeight="Bold"
+                   Foreground="{StaticResource BrushTextMuted}" Margin="0,0,0,8"/>
+
+        <TextBox x:Name="TxtConnectionString" Style="{StaticResource DarkTextBox}"
+                 Margin="0,0,0,16" TextWrapping="Wrap"/>
+
+        <Button Content="SAUVEGARDER" Style="{StaticResource GoldButton}"
+                Click="BtnSave_Click" Margin="0,0,0,16"/>
+
+        <TextBlock x:Name="TxtStatus" FontSize="12" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushAccentGold}"/>
+    </StackPanel>
+</Page>

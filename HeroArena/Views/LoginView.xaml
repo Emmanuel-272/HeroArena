@@ -1,0 +1,62 @@
+﻿<Window x:Class="HeroArena.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hero Arena" Height="520" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource BrushBgDark}">
+
+    <Grid>
+        <Rectangle Height="3" VerticalAlignment="Top"
+                   Fill="{StaticResource BrushAccentGold}"/>
+
+        <StackPanel VerticalAlignment="Center" Margin="50,0">
+
+            <StackPanel Margin="0,0,0,40">
+                <TextBlock Text="⚔" FontSize="48"
+                           Foreground="{StaticResource BrushAccentGold}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="HERO ARENA" FontSize="26" FontWeight="Black"
+                           Foreground="{StaticResource BrushTextPrimary}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Entrez dans l'arène" FontSize="12"
+                           Foreground="{StaticResource BrushTextMuted}"
+                           HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <TextBlock Text="IDENTIFIANT" FontSize="11" FontWeight="SemiBold"
+                       Foreground="{StaticResource BrushTextMuted}"
+                       Margin="0,0,0,6"/>
+            <TextBox x:Name="TxtUsername" Style="{StaticResource DarkTextBox}"
+                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="0,0,0,16"/>
+
+            <TextBlock Text="MOT DE PASSE" FontSize="11" FontWeight="SemiBold"
+                       Foreground="{StaticResource BrushTextMuted}"
+                       Margin="0,0,0,6"/>
+            <PasswordBox x:Name="PwdPassword" Style="{StaticResource DarkPasswordBox}"
+                         Margin="0,0,0,24"/>
+
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="{StaticResource BrushAccentRed}"
+                       FontSize="12" TextWrapping="Wrap" Margin="0,0,0,16"
+                       Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
+
+            <Button Content="SE CONNECTER" Style="{StaticResource GoldButton}"
+                    Click="BtnLogin_Click"
+                    Margin="0,0,0,16"/>
+
+            <Button Content="⚙ Configurer la base de données"
+                    Style="{StaticResource GhostButton}"
+                    Command="{Binding GoToSettingsCommand}"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Background="#88000000"
+              Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock Text="Connexion en cours..."
+                       Foreground="{StaticResource BrushAccentGold}"
+                       FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>
