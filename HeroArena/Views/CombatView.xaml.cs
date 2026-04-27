@@ -9,8 +9,6 @@ namespace HeroArena.Views;
 
 public partial class CombatView : Page
 {
-    private const int HP_MAX_WHEN_DIE = 12;
-
     private Hero? _playerHero;
     private Hero? _enemyHero;
     private int _playerCurrentHP;
@@ -44,7 +42,6 @@ public partial class CombatView : Page
         if (_playerHero == null)
             _playerHero = heroes[0];
 
-        // Ennemi aléatoire différent du joueur avec +10% HP et +5% dégâts
         var enemies = heroes.Where(h => h.ID != _playerHero.ID).ToList();
         var baseEnemy = enemies[_rnd.Next(enemies.Count)];
 
@@ -95,7 +92,6 @@ public partial class CombatView : Page
         if (_combatOver || _playerHero == null || _enemyHero == null) return;
         if (sender is not Button btn || btn.Tag is not HeroSpell heroSpell) return;
 
-        // Tour joueur
         int playerDmg = heroSpell.Spell!.Damage;
         _enemyCurrentHP -= playerDmg;
         if (_enemyCurrentHP < 0) _enemyCurrentHP = 0;
@@ -112,7 +108,6 @@ public partial class CombatView : Page
             return;
         }
 
-        // Tour ennemi
         var enemySpells = _enemyHero.HeroSpells.ToList();
         var enemySpell = enemySpells[_rnd.Next(enemySpells.Count)];
         int enemyDmg = enemySpell.Spell!.Damage;
@@ -120,18 +115,14 @@ public partial class CombatView : Page
         if (_playerCurrentHP < 0) _playerCurrentHP = 0;
         TxtLog.Text += $"💀 {_enemyHero.Name} utilise {enemySpell.Spell.Name} → {enemyDmg} dégâts !\n";
 
-        if (_playerCurrentHP <= HP_MAX_WHEN_DIE)
+        if (_playerCurrentHP <= 0)
         {
-            if (_playerCurrentHP <= 0)
-            {
-                _combatOver = true;
-                UpdateUI();
-                TxtLog.Text += GetDeathMessage(_playerHero.Name, true);
-                BtnNewCombat.Visibility = Visibility.Visible;
-                ScrollLog.ScrollToBottom();
-                return;
-            }
-            TxtLog.Text += $"⚠ {_playerHero.Name} est en danger critique ! ({_playerCurrentHP} HP)\n";
+            _combatOver = true;
+            UpdateUI();
+            TxtLog.Text += GetDeathMessage(_playerHero.Name, true);
+            BtnNewCombat.Visibility = Visibility.Visible;
+            ScrollLog.ScrollToBottom();
+            return;
         }
 
         UpdateUI();

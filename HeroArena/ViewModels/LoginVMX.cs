@@ -11,8 +11,6 @@ namespace HeroArena.ViewModels;
 
 public class LoginVMX : INotifyPropertyChanged
 {
-    public bool DebugFlag { get; set; } = false;
-
     private string _username = string.Empty;
     private string _errorMessage = string.Empty;
     private bool _isLoading = false;

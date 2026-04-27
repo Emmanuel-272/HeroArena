@@ -35,4 +35,4 @@ Application de combat tour par tour avec des héros.
 
 ## Notes
 
-La connection string peut aussi être modifiée directement depuis l'onglet Settings de l'application sans avoir à recompiler.
+La connection string peut aussi être modifiée directement depuis l'onglet Settings de l'application sans avoir à recompiler.	
